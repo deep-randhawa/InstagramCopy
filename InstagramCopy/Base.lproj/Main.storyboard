@@ -144,9 +144,57 @@
                     <view key="view" contentMode="scaleToFill" id="9Ih-4K-pPQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zqG-7O-f1F">
+                                <rect key="frame" x="30" y="350" width="315" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JPp-zR-E8N" customClass="PFImageView">
+                                <rect key="frame" x="62" y="70" width="250" height="250"/>
+                                <color key="backgroundColor" red="0.60310071243523322" green="0.60310071243523322" blue="0.60310071243523322" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="HhO-FU-P5y"/>
+                                    <constraint firstAttribute="height" constant="250" id="JQT-8W-T1T"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rCg-lD-qJS">
+                                <rect key="frame" x="137.5" y="430" width="100" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="HcV-gu-akD"/>
+                                    <constraint firstAttribute="width" constant="100" id="IrP-CW-IR2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <state key="normal" title="POST"/>
+                                <connections>
+                                    <action selector="userSubmittedPost:" destination="N0S-93-Xes" eventType="touchUpInside" id="tds-Vp-u9Y"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tap to select image" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yuy-BR-ogB">
+                                <rect key="frame" x="112" y="185" width="150" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="rCg-lD-qJS" firstAttribute="top" secondItem="zqG-7O-f1F" secondAttribute="bottom" constant="50" id="BJR-fW-PtH"/>
+                            <constraint firstAttribute="trailing" secondItem="zqG-7O-f1F" secondAttribute="trailing" constant="30" id="Jkq-cq-SUw"/>
+                            <constraint firstItem="zqG-7O-f1F" firstAttribute="leading" secondItem="9Ih-4K-pPQ" secondAttribute="leading" constant="30" id="XBY-FX-95b"/>
+                            <constraint firstItem="JPp-zR-E8N" firstAttribute="centerX" secondItem="9Ih-4K-pPQ" secondAttribute="centerX" id="bfu-Bi-O9q"/>
+                            <constraint firstItem="rCg-lD-qJS" firstAttribute="centerX" secondItem="9Ih-4K-pPQ" secondAttribute="centerX" id="k9j-eA-3j4"/>
+                            <constraint firstItem="JPp-zR-E8N" firstAttribute="top" secondItem="QCF-Op-uOl" secondAttribute="bottom" constant="50" id="pIt-yD-XDM"/>
+                            <constraint firstItem="zqG-7O-f1F" firstAttribute="top" secondItem="JPp-zR-E8N" secondAttribute="bottom" constant="30" id="tKR-lP-yet"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="vJz-Ca-5gE"/>
+                    <connections>
+                        <outlet property="captionTextField" destination="zqG-7O-f1F" id="gJ0-tp-xFm"/>
+                        <outlet property="photoView" destination="JPp-zR-E8N" id="7JS-Lr-IkH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7ic-sI-Y5z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
