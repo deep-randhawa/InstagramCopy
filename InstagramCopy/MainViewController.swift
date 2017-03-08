@@ -24,21 +24,24 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tabBarItem = UITabBarItem.init(title: "Home", image: UIImage.init(named: "ic_home"), tag: 1)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
         let query = PFQuery.init(className: "Post")
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
             if error == nil {
                 self.posts = posts!
-                
-                // TODO: Fix this once you're able to upload data
-                // self.mainTableView.reloadData()
+                self.mainTableView.reloadData()
             } else {
                 print(error?.localizedDescription)
             }
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,9 +55,16 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = mainTableView.dequeueReusableCell(withIdentifier: "MainTableViewCell") as! MainTableViewCell
+        let post = posts[indexPath.row]
         
-        
-        
+        cell.captionLabel.text = post.value(forKey: "caption") as? String
+        if let postImage = post.value(forKey: "media") as? PFFile {
+            postImage.getDataInBackground(block: { (imageData: Data?, error: Error?) in
+                if (error == nil) {
+                    cell.imageView?.image = UIImage.init(data: imageData!)
+                }
+            })
+        }
         return cell
     }
     
