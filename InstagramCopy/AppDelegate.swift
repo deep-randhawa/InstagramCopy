@@ -17,11 +17,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+    
+        // Parse Setup
         Parse.initialize(with: ParseClientConfiguration.init(block: { (config: ParseMutableClientConfiguration) in
             config.applicationId = "InstagramCopy"
             config.clientKey = "kajsdfl;aoidsf;kqjwe;riqiefnqwekfnqjnwefq"
             config.server = "http://stark-inlet-39154.herokuapp.com/parse"
         }))
+        
+        if (PFUser.current() != nil) {
+            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "MainViewController")
+            window?.rootViewController = viewController
+        }
         return true
     }
 

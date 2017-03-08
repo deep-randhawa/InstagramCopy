@@ -7,6 +7,7 @@ target 'InstagramCopy' do
 
   # Pods for InstagramCopy
   pod 'Parse'
+  pod 'AFNetworking'
 
   target 'InstagramCopyTests' do
     inherit! :search_paths
