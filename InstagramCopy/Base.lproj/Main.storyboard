@@ -13,7 +13,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="InstagramCopy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="BYZ-38-t0r" customClass="LoginViewController" customModule="InstagramCopy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -218,9 +218,31 @@
                     <view key="view" contentMode="scaleToFill" id="M0y-xa-zZl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yKS-Db-C2u">
+                                <rect key="frame" x="36" y="313.5" width="303" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="v8b-XS-3kn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="onLogOutButtonPressed:" destination="UBS-pW-IgX" eventType="touchUpInside" id="0oU-xu-e31"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="yKS-Db-C2u" firstAttribute="centerY" secondItem="M0y-xa-zZl" secondAttribute="centerY" id="OFo-Ah-8WJ"/>
+                            <constraint firstItem="yKS-Db-C2u" firstAttribute="leading" secondItem="M0y-xa-zZl" secondAttribute="leadingMargin" constant="20" id="i6p-2c-uGc"/>
+                            <constraint firstItem="yKS-Db-C2u" firstAttribute="centerX" secondItem="M0y-xa-zZl" secondAttribute="centerX" id="klY-rT-HTd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="yKS-Db-C2u" secondAttribute="trailing" constant="20" id="xIF-fO-oJx"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="29t-oS-qfR"/>
+                    <connections>
+                        <outlet property="logoutButton" destination="yKS-Db-C2u" id="7Cs-cf-M3G"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w3P-Dg-Dk4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

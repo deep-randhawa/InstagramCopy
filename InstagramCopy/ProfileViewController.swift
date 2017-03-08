@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import Parse
 
 class ProfileViewController: UIViewController {
 
+    // OUTLETS
+    @IBOutlet weak var logoutButton: UIButton!
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
@@ -27,6 +31,17 @@ class ProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func onLogOutButtonPressed(_ sender: Any) {
+        PFUser.logOutInBackground { (error: Error?) in
+            if (error == nil) {
+                let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+                let controller: LoginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                self.present(controller, animated: true, completion: nil)
+            } else {
+                print(error?.localizedDescription)
+            }
+        }
+    }
 
     /*
     // MARK: - Navigation

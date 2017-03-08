@@ -31,7 +31,7 @@ class LoginViewController: UIViewController {
         PFUser.logInWithUsername(inBackground: usernameField.text!, password: passwordField.text!) { (user: PFUser?, error: Error?) in
             if (user != nil) {
                 print("You're logged in.")
-                self.performSegue(withIdentifier: "LoginSegue", sender: nil)
+                self.performSegue(withIdentifier: "LoginVCToMainVCSegue", sender: nil)
             }
         }
     }
@@ -45,7 +45,7 @@ class LoginViewController: UIViewController {
         user.signUpInBackground { (success: Bool, error: Error?) in
             if (success) {
                 print("Created a new user.")
-                self.performSegue(withIdentifier: "LoginSegue", sender: nil)
+                self.performSegue(withIdentifier: "LoginVCToMainVCSegue", sender: nil)
             } else {
                 print(error?.localizedDescription)
             }
