@@ -8,6 +8,7 @@
 
 import UIKit
 import AFNetworking
+import Parse
 
 class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -15,12 +16,29 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var mainTableView: UITableView!
     
     // GLOBAL VARS
-    var instances: [Instance] = []
+    var posts: [PFObject] = []
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        tabBarItem = UITabBarItem.init(title: "Home", image: UIImage.init(named: "ic_home"), tag: 1)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let query = PFQuery.init(className: "Post")
+        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+            if error == nil {
+                self.posts = posts!
+                
+                // TODO: Fix this once you're able to upload data
+                // self.mainTableView.reloadData()
+            } else {
+                print(error?.localizedDescription)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,15 +47,13 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return instances.count
+        return posts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = mainTableView.dequeueReusableCell(withIdentifier: "MainTableViewCell") as! MainTableViewCell
-        let thisInstance = instances[indexPath.row]
         
-        cell.captionLabel.text = thisInstance.caption
-        cell.photoImageView.setImageWith(thisInstance.photoURL!)
+        
         
         return cell
     }

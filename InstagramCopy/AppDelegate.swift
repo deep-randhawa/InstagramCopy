@@ -27,8 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if (PFUser.current() != nil) {
             let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-            let viewController = storyboard.instantiateViewController(withIdentifier: "MainViewController")
-            window?.rootViewController = viewController
+            let controller = storyboard.instantiateViewController(withIdentifier: "TabBarController")
+            window?.rootViewController = controller
         }
         return true
     }
