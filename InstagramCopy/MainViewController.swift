@@ -20,12 +20,22 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
         tabBarItem = UITabBarItem.init(title: "Home", image: UIImage.init(named: "ic_home"), tag: 1)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+        mainTableView.delegate = self
+        mainTableView.dataSource = self
+        mainTableView.estimatedRowHeight = 400
+        mainTableView.rowHeight = UITableViewAutomaticDimension
         
         let query = PFQuery.init(className: "Post")
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
@@ -36,12 +46,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 print(error?.localizedDescription)
             }
         }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,12 +62,13 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let cell = mainTableView.dequeueReusableCell(withIdentifier: "MainTableViewCell") as! MainTableViewCell
         let post = posts[indexPath.row]
         
-        cell.captionLabel.text = post.value(forKey: "caption") as? String
+        cell.captionLabel.text = post["caption"] as? String
         if let postImage = post.value(forKey: "media") as? PFFile {
             postImage.getDataInBackground(block: { (imageData: Data?, error: Error?) in
-                if (error == nil) {
-                    cell.imageView?.image = UIImage.init(data: imageData!)
+                guard let data = imageData else {
+                    return
                 }
+                cell.photoImageView.image = UIImage(data: data)
             })
         }
         return cell
